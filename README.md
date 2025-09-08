@@ -62,3 +62,36 @@
    - 공식 문서: https://python-poetry.org/docs/#installation
 
 ### 프로젝트 설정 및 의존성 설치
+
+
+## 🔀 Git Flow 브랜치 전략
+
+본 프로젝트는 Git Flow 전략을 기반으로 브랜치를 운영합니다.
+
+### 주요 브랜치
+- **main** : 운영/배포용 브랜치 (항상 안정 상태 유지)
+- **develop** : 개발 통합 브랜치 (기능 개발 결과물을 모음)
+
+### 보조 브랜치
+- **feature/\*** : 새로운 기능 개발 시 `develop` 에서 분기 → 완료 후 `develop` 으로 머지
+- **release/\*** : 배포 준비 시 `develop` 에서 분기 → QA 및 안정화 후 `main` 과 `develop` 에 머지
+- **hotfix/\*** : 운영 중 긴급 버그 수정 시 `main` 에서 분기 → 수정 후 `main` 과 `develop` 에 머지
+
+### 브랜치 흐름 예시
+```mermaid
+gitGraph
+   commit id: "v1.0"
+   branch develop
+   commit id: "init"
+   branch feature/featA
+   commit id: "featA-1"
+   commit id: "featA-2"
+   checkout develop
+   merge feature/featA
+   branch release/1.0.1
+   commit id: "QA fix"
+   checkout main
+   merge release/1.0.1
+   commit id: "v1.0.1"
+   checkout develop
+   merge release/1.0.1
