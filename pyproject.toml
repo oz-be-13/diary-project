@@ -22,7 +22,7 @@ tortoise-orm = {version = "^0.20.0", extras = ["asyncpg"]}
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.3"
-httpx = "^0.28.
+httpx = "^0.28.0"
 ruff = "^0.6.4"
 black = "^24.5.0"
 
