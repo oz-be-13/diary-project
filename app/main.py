@@ -1,13 +1,11 @@
 from fastapi import FastAPI
+from app.api.v1 import quotes, questions
+from app.db.pool import init_db_pool
 
-app = FastAPI()
+app = FastAPI(title="Diary Project API")
+app.include_router(quotes.router)
+app.include_router(questions.router)
 
-
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
-
-
-@app.get("/hello/{name}")
-async def say_hello(name: str):
-    return {"message": f"Hello {name}"}
+@app.on_event("startup")
+async def startup():
+    await init_db_pool()
